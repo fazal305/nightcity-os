@@ -181,39 +181,33 @@ function removeTaskbarPill(windowId) {
 function renderAppContent(appId, contentElement) {
     if (appId === "radio") {
         renderRadioApp(contentElement);
-
         return;
     }
 
     if (appId === "terminal") {
         renderTerminalApp(contentElement);
-
         return;
     }
 
     if (appId === "notes") {
         renderNotesApp(contentElement);
-
         return;
     }
 
     if (appId === "weather") {
         renderWeatherApp(contentElement);
-
         return;
     }
 
     if (appId === "settings") {
         renderSettingsApp(contentElement);
-
         return;
     }
 
-    if (appId === "explorer") {
-    renderExplorerApp(contentElement);
-
-    return;
-}
+    if (appId === "files") {
+        renderExplorerApp(contentElement);
+        return;
+    }
 
     contentElement.innerHTML = `
         <div class="window-placeholder">
