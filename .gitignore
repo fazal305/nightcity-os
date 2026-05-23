@@ -1,0 +1,20 @@
+```gitignore
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+
+# Large local media
+assets/audio/*.mp3
+assets/audio/*.wav
+assets/audio/*.ogg

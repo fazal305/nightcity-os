@@ -1,0 +1,245 @@
+/* 
+   Settings app layout
+*/
+
+.settings-app {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+}
+
+.settings-panel {
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.settings-panel h3 {
+    margin-bottom: 14px;
+    color: var(--accent-cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.settings-button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.settings-btn {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.settings-btn:hover {
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    box-shadow: 0 0 14px rgba(0, 245, 255, 0.25);
+}
+
+.settings-color-picker {
+    width: 100%;
+    height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.settings-status {
+    margin-top: auto;
+    color: var(--muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+}
+
+/* 
+   Settings app layout
+*/
+
+.settings-app {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+}
+
+.settings-panel {
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.settings-panel h3 {
+    margin-bottom: 14px;
+    color: var(--accent-cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.settings-button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.settings-btn {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.settings-btn:hover {
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    box-shadow: 0 0 14px rgba(0, 245, 255, 0.25);
+}
+
+.settings-color-picker {
+    width: 100%;
+    height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.settings-status {
+    margin-top: auto;
+    color: var(--muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+}
+
+/* 
+   Explorer app layout
+*/
+
+.explorer-app {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+.explorer-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+    border-right: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.explorer-sidebar-btn {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.08em;
+}
+
+.explorer-sidebar-btn:hover {
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+}
+
+.explorer-content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.explorer-header {
+    padding: 18px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.explorer-header h3 {
+    color: var(--accent-cyan);
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.explorer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 18px;
+    padding: 18px;
+    overflow-y: auto;
+}
+
+.explorer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 10px;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text);
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.explorer-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 18px rgba(0, 245, 255, 0.18);
+}
+
+.explorer-item-icon {
+    font-size: 2.4rem;
+}
+
+.explorer-item-name {
+    font-size: 0.72rem;
+    text-align: center;
+    letter-spacing: 0.08em;
+    word-break: break-word;
+}
+
+@media (max-width: 700px) {
+
+    .explorer-app {
+        grid-template-columns: 1fr;
+    }
+
+    .explorer-sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+}

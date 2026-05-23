@@ -1,0 +1,233 @@
+/* 
+   App window shell
+*/
+
+.app-window {
+    position: absolute;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 280px;
+
+    min-height: 220px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    background: rgba(8, 8, 15, 0.86);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 0 24px rgba(0, 245, 255, 0.16),
+        inset 0 0 20px rgba(191, 95, 255, 0.08);
+
+    overflow: hidden;
+}
+
+.app-window.maximized {
+    left: 16px !important;
+
+    top: 16px !important;
+
+    width: calc(100vw - 32px) !important;
+
+    height: calc(100vh - 96px) !important;
+}
+
+.app-window.minimized {
+    display: none;
+}
+
+/* 
+   Window title bar
+*/
+
+.window-title-bar {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    height: 42px;
+
+    padding: 0 12px;
+
+    border-bottom: 1px solid var(--border);
+
+    background: rgba(255, 255, 255, 0.04);
+
+    cursor: grab;
+}
+
+.window-title-bar:active {
+    cursor: grabbing;
+}
+
+.window-title {
+    color: var(--text);
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 0.78rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+}
+
+.window-controls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.window-control-btn {
+    width: 24px;
+
+    height: 24px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    font-size: 0.75rem;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.window-control-btn:hover {
+    transform: scale(1.08);
+
+    box-shadow: 0 0 12px currentColor;
+}
+
+.close-btn {
+    color: var(--accent-red);
+}
+
+.maximize-btn {
+    color: var(--accent-cyan);
+}
+
+.minimize-btn {
+    color: var(--accent-purple);
+}
+
+/* 
+   Window content area
+*/
+
+.window-content {
+    flex: 1;
+
+    padding: 18px;
+
+    overflow: auto;
+}
+
+.window-placeholder {
+    display: grid;
+
+    place-items: center;
+
+    height: 100%;
+
+    min-height: 140px;
+
+    color: var(--muted);
+
+    text-align: center;
+
+    letter-spacing: 0.08em;
+}
+
+/* 
+   Open app pills in taskbar
+*/
+
+#taskbar-apps {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+}
+
+.taskbar-app-pill {
+    max-width: 150px;
+
+    padding: 7px 12px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    font-family: 'Share Tech Mono', monospace;
+
+    font-size: 0.72rem;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.taskbar-app-pill:hover {
+    border-color: var(--accent-cyan);
+
+    color: var(--accent-cyan);
+
+    box-shadow: 0 0 12px rgba(0, 245, 255, 0.28);
+}
+
+/* 
+   Mobile window layout
+*/
+
+@media (max-width: 600px) {
+
+    .app-window {
+        left: 10px !important;
+
+        top: 10px !important;
+
+        width: calc(100vw - 20px) !important;
+
+        height: calc(100vh - 84px) !important;
+    }
+
+    #taskbar-apps {
+        display: none;
+    }
+}
