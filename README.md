@@ -14,10 +14,8 @@ NIGHTCITY OS simulates a complete desktop environment directly inside the browse
 
 # SCREENSHOT
 
-Add your screenshot later here:
+<img width="1272" height="888" alt="image" src="https://github.com/user-attachments/assets/3bfb0286-9536-4fcd-bebc-ac8344da6dcf" />
 
-```md
-![NIGHTCITY OS Screenshot](assets/screenshots/nightcity-preview.png)
 ```
 
 ---
