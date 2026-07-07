@@ -1,100 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>NIGHTCITY // OPERATING SYSTEM</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta
+      name="description"
+      content="A browser-based cyberpunk desktop simulator with draggable windows, apps, notifications, themes, notes, weather, and canvas wallpapers."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Share+Tech+Mono&display=swap"
-        rel="stylesheet"
-    >
+    <link rel="stylesheet" href="css/themes.css" />
+    <link rel="stylesheet" href="css/desktop.css" />
+    <link rel="stylesheet" href="css/windows.css" />
+    <link rel="stylesheet" href="css/apps.css" />
+  </head>
 
-    <link rel="stylesheet" href="css/themes.css">
-    <link rel="stylesheet" href="css/desktop.css">
-    <link rel="stylesheet" href="css/windows.css">
-    <link rel="stylesheet" href="css/apps.css">
-</head>
-
-<body>
-
+  <body>
     <section id="boot-screen">
-        <div class="boot-panel">
-            <p class="boot-logo">NIGHTCITY // OS</p>
-            <div id="boot-output"></div>
-            <span class="boot-cursor"></span>
-        </div>
+      <div class="boot-panel">
+        <p class="boot-logo">NIGHTCITY // OS</p>
+        <div id="boot-output"></div>
+        <span class="boot-cursor"></span>
+      </div>
     </section>
 
     <section id="screensaver">
-        <div class="screensaver-orb"></div>
-        <p>NIGHTCITY IDLE MODE</p>
-        <span>move mouse or press any key to wake</span>
+      <div class="screensaver-orb"></div>
+      <p>NIGHTCITY IDLE MODE</p>
+      <span>move mouse or press any key to wake</span>
     </section>
 
     <div id="desktop">
+      <canvas id="wallpaper-canvas"></canvas>
 
-        <canvas id="wallpaper-canvas"></canvas>
+      <main id="desktop-workspace">
+        <section id="desktop-icons" aria-label="Desktop applications"></section>
 
-        <main id="desktop-workspace">
-            <section
-                id="desktop-icons"
-                aria-label="Desktop applications"
-            ></section>
+        <section id="window-layer" aria-label="Open windows"></section>
+      </main>
 
-            <section
-                id="window-layer"
-                aria-label="Open windows"
-            ></section>
-        </main>
+      <section
+        id="notification-container"
+        aria-label="System notifications"
+      ></section>
 
-        <section
-            id="notification-container"
-            aria-label="System notifications"
-        ></section>
+      <footer id="taskbar">
+        <button
+          id="app-launcher-btn"
+          class="taskbar-button"
+          type="button"
+          aria-label="Open app launcher"
+        >
+          OS
+        </button>
 
-        <footer id="taskbar">
-            <button
-                id="app-launcher-btn"
-                class="taskbar-button"
-                type="button"
-                aria-label="Open app launcher"
-            >
-                ▦
-            </button>
+        <div id="taskbar-apps"></div>
 
-            <div id="taskbar-apps"></div>
+        <div id="taskbar-clock">00:00:00</div>
 
-            <div id="taskbar-clock">00:00:00</div>
+        <div id="system-tray">
+          <button
+            id="notification-test-btn"
+            class="taskbar-button"
+            type="button"
+            aria-label="Test notification"
+          >
+            !!
+          </button>
 
-            <div id="system-tray">
-                <button
-                    id="notification-test-btn"
-                    class="taskbar-button"
-                    type="button"
-                    aria-label="Test notification"
-                >
-                    🔔
-                </button>
-
-                <span class="tray-status">ONLINE</span>
-            </div>
-        </footer>
-
+          <span class="tray-status">ONLINE</span>
+        </div>
+      </footer>
     </div>
 
     <script src="js/storage/storage.js"></script>
@@ -113,7 +101,5 @@
 
     <script src="js/canvas/wallpaper.js"></script>
     <script src="js/audio/ambient.js"></script>
-
-</body>
-
+  </body>
 </html>

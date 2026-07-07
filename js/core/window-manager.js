@@ -251,23 +251,23 @@ function openWindow(appId) {
     titleBar.classList.add("window-title-bar");
 
     title.classList.add("window-title");
-    title.textContent = `${app.emoji} ${app.label}`;
+    title.textContent = `[${app.emoji}] ${app.label}`;
 
     controls.classList.add("window-controls");
 
     minimizeButton.classList.add("window-control-btn", "minimize-btn");
     minimizeButton.type = "button";
-    minimizeButton.textContent = "–";
+    minimizeButton.textContent = "_";
     minimizeButton.setAttribute("aria-label", "Minimize window");
 
     maximizeButton.classList.add("window-control-btn", "maximize-btn");
     maximizeButton.type = "button";
-    maximizeButton.textContent = "□";
+    maximizeButton.textContent = "[]";
     maximizeButton.setAttribute("aria-label", "Maximize window");
 
     closeButton.classList.add("window-control-btn", "close-btn");
     closeButton.type = "button";
-    closeButton.textContent = "✕";
+    closeButton.textContent = "X";
     closeButton.setAttribute("aria-label", "Close window");
 
     content.classList.add("window-content");

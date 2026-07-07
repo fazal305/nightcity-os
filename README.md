@@ -1,96 +1,41 @@
-# NIGHTCITY // OPERATING SYSTEM
+# NIGHTCITY OS
 
-A futuristic browser-based cyberpunk operating system built entirely with HTML, CSS, and vanilla JavaScript.
+A browser-based cyberpunk desktop simulator built with HTML, CSS, Canvas, localStorage, Open-Meteo, and vanilla JavaScript.
 
-NIGHTCITY OS simulates a complete desktop environment directly inside the browser with draggable windows, a terminal, notes system, animated wallpapers, notifications, weather API integration, fake file explorer, themes, and reactive ambient systems.
+## Live Demo
 
----
+https://fazal305.github.io/nightcity-os/
 
-# LIVE DEMO
+## Project Overview
 
-🚀 https://fazal305.github.io/nightcity-os/
+NIGHTCITY OS turns the browser into a fictional neon operating system. It includes a boot sequence, animated desktop wallpaper, draggable app windows, a taskbar, notifications, settings, notes, a terminal, weather, a file explorer, and a radio-style audio interface.
 
----
+The project is built without frameworks and uses a modular file structure to keep each desktop system and application separate.
 
-# SCREENSHOT
+## Screenshot
 
-<img width="1272" height="888" alt="image" src="https://github.com/user-attachments/assets/3bfb0286-9536-4fcd-bebc-ac8344da6dcf" />
+![Nightcity OS Screenshot](image.png)
 
-```
+## Features
 
----
-
-# FEATURES
-
-## Desktop System
-
+- Animated boot screen
 - Cyberpunk desktop environment
-- Draggable application windows
-- Minimize / maximize / close controls
-- Taskbar with live clock
-- Floating desktop icons
-- CRT scanline visual effect
-- Responsive layout
-
-## Applications
-
-### TERMINAL
-
-- Fake command-line interface
-- Commands like:
-  - `help`
-  - `date`
-  - `whoami`
-  - `system-info`
-  - `launch radio`
-
-### NOTES
-
-- Create notes
-- Auto-save system
-- localStorage persistence
-- Delete and switch notes
-
-### WEATHER
-
-- Real Karachi weather
-- Open-Meteo API integration
-- Wind, humidity, sunrise, sunset
-
-### SETTINGS
-
-- Theme switching
-- Accent color customization
-- Animated wallpaper switching
-- Saved preferences
-
-### FILE EXPLORER
-
-- Fake file system
-- Folder navigation
-- File opening notifications
-- Interactive explorer UI
-
-### NIGHTSHIFT FM
-
-- Fake cyberpunk radio interface
-- Station switching
-- Animated audio visualizer
-
----
-
-# AMBIENT SYSTEMS
-
-- Animated canvas wallpapers
-- Rain / stars / city modes
+- Draggable, minimizable, maximizable, and closable app windows
+- Taskbar with live clock and app pills
+- Desktop icons generated from JavaScript app data
+- Notification system
+- Canvas wallpaper modes
 - Idle screensaver
 - Deep night mode
-- Notification engine
-- Reactive desktop effects
+- Theme switching and accent customization
+- Notes app with localStorage persistence
+- Fake terminal with custom commands
+- File explorer simulation
+- Weather app using Open-Meteo
+- Nightshift FM radio interface
+- Responsive desktop behavior
 
----
-
-# BUILT WITH
+## Built With
 
 - HTML5
 - CSS3
@@ -99,96 +44,77 @@ NIGHTCITY OS simulates a complete desktop environment directly inside the browse
 - localStorage
 - Open-Meteo API
 
----
-
-# PROJECT STRUCTURE
+## Project Structure
 
 ```text
 nightcity-os/
-│
-├── index.html
-│
-├── css/
-│   ├── apps.css
-│   ├── desktop.css
-│   ├── themes.css
-│   └── windows.css
-│
-├── js/
-│   ├── apps/
-│   ├── audio/
-│   ├── canvas/
-│   ├── core/
-│   ├── storage/
-│   └── widgets/
-│
-├── assets/
-│
-├── README.md
-├── LICENSE
-└── .gitignore
+|-- index.html
+|-- image.png
+|-- README.md
+|-- LICENSE
+|-- css/
+|   |-- apps.css
+|   |-- desktop.css
+|   |-- themes.css
+|   |-- windows.css
+|-- js/
+|   |-- apps/
+|   |   |-- explorer.js
+|   |   |-- notes.js
+|   |   |-- radio.js
+|   |   |-- settings.js
+|   |   |-- terminal.js
+|   |   |-- weather.js
+|   |-- audio/
+|   |   |-- ambient.js
+|   |-- canvas/
+|   |   |-- wallpaper.js
+|   |-- core/
+|   |   |-- desktop.js
+|   |   |-- taskbar.js
+|   |   |-- window-manager.js
+|   |-- storage/
+|   |   |-- storage.js
+|   |-- widgets/
+|       |-- notifications.js
 ```
 
----
+## How To Run
 
-# HOW TO RUN
+Open `index.html` in a browser.
 
-Clone the repository:
+No installation, bundler, or framework is required.
 
-```bash
-git clone https://github.com/fazal305/nightcity-os.git
-```
+## Portfolio Notes
 
-Open:
-
-```text
-index.html
-```
-
-inside your browser.
-
-No frameworks or installation required.
-
----
-
-# WHY THIS PROJECT EXISTS
-
-This project was built to practice:
+This project demonstrates:
 
 - Multi-file frontend architecture
-- DOM manipulation
-- Window management systems
-- Browser storage systems
+- DOM-driven desktop UI systems
+- Window management logic
+- Canvas animation
+- Browser storage
 - API integration
-- Canvas animations
-- Interactive UI engineering
-- Large-scale vanilla JavaScript projects
+- Interactive app design
+- Responsive UI engineering with vanilla JavaScript
 
----
+## Future Ideas
 
-# FUTURE IDEAS
+- Saveable desktop icon positions
+- More terminal commands
+- Real audio playback
+- Browser app simulation
+- App marketplace screen
+- Login and user profile simulation
+- Mission-style mini apps
 
-- Boot sound effects
-- Real audio engine
-- App marketplace
-- Browser app
-- Fake internet system
-- Multi-user login simulation
-- Saveable desktop positions
-- Fake hacking missions
-
----
-
-# AUTHOR
+## Author
 
 Fazal Abbas
 
-GitHub: https://github.com/fazal305
+- GitHub: https://github.com/fazal305
+- LinkedIn: https://www.linkedin.com/in/fazal-abbas-4653dg86
 
-LinkedIn: https://www.linkedin.com/in/fazal-abbas-4653dg86
+## License
 
----
-
-# LICENSE
-
-MIT License
+This project is licensed under the MIT License.

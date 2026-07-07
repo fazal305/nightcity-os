@@ -9,7 +9,7 @@ const apps = [
     {
         id: "radio",
         label: "NIGHTSHIFT FM",
-        emoji: "📻",
+        emoji: "FM",
         color: "#bf5fff",
         windowWidth: 620,
         windowHeight: 440
@@ -17,7 +17,7 @@ const apps = [
     {
         id: "terminal",
         label: "TERMINAL",
-        emoji: "🖥️",
+        emoji: ">_",
         color: "#00f5ff",
         windowWidth: 680,
         windowHeight: 460
@@ -25,7 +25,7 @@ const apps = [
     {
         id: "notes",
         label: "NOTES",
-        emoji: "📝",
+        emoji: "NT",
         color: "#ffcc00",
         windowWidth: 720,
         windowHeight: 500
@@ -33,7 +33,7 @@ const apps = [
     {
         id: "weather",
         label: "WEATHER",
-        emoji: "🌦️",
+        emoji: "WX",
         color: "#00f5ff",
         windowWidth: 560,
         windowHeight: 420
@@ -41,7 +41,7 @@ const apps = [
     {
         id: "settings",
         label: "SETTINGS",
-        emoji: "⚙️",
+        emoji: "CFG",
         color: "#ff003c",
         windowWidth: 600,
         windowHeight: 460
@@ -49,16 +49,13 @@ const apps = [
     {
         id: "files",
         label: "FILES",
-        emoji: "📁",
+        emoji: "DIR",
         color: "#bf5fff",
         windowWidth: 620,
         windowHeight: 440
     }
 ];
 
-/* 
-   Runs the startup boot animation before showing the desktop
-*/
 function bootSequence() {
     const bootScreen = document.querySelector("#boot-screen");
     const bootOutput = document.querySelector("#boot-output");
@@ -93,9 +90,6 @@ function bootSequence() {
     }, 700);
 }
 
-/* 
-   Builds the desktop icons from the apps array
-*/
 function renderDesktopIcons() {
     const desktopIcons = document.querySelector("#desktop-icons");
 
@@ -129,10 +123,13 @@ function renderDesktopIcons() {
             openWindow(app.id);
         });
 
+        iconButton.addEventListener("click", function () {
+            iconButton.focus();
+        });
+
         desktopIcons.appendChild(iconButton);
     });
 }
 
 bootSequence();
-
 renderDesktopIcons();
