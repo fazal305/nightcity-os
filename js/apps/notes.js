@@ -52,7 +52,9 @@ function setupNotesApp() {
     const notes = loadAllNotes();
 
     if (notes.length === 0) {
-        createNewNote();
+        activeNoteId = null;
+        renderNotesList();
+        showEmptyState();
     } else {
         activeNoteId = notes[0].id;
         renderNotesList();
@@ -101,6 +103,17 @@ function renderNotesList() {
 
     notesList.innerHTML = "";
 
+    if (notes.length === 0) {
+        const emptyMessage = document.createElement("p");
+
+        emptyMessage.classList.add("notes-empty-message");
+        emptyMessage.textContent = "No notes yet.";
+
+        notesList.appendChild(emptyMessage);
+
+        return;
+    }
+
     notes.forEach(function (note) {
         const noteButton = document.createElement("button");
 
@@ -123,7 +136,25 @@ function renderNotesList() {
     });
 }
 
-/* 
+/*
+   Shows a simple empty state when there are no notes yet
+*/
+function showEmptyState() {
+    const titleInput = document.querySelector("#notes-title-input");
+    const contentInput = document.querySelector("#notes-content-input");
+
+    if (titleInput) {
+        titleInput.value = "";
+    }
+
+    if (contentInput) {
+        contentInput.value = "";
+    }
+
+    updateNotesStatus("No notes yet. Click \"+ New Note\" to create one.");
+}
+
+/*
    Loads the selected note into the editor
 */
 function loadActiveNote() {
@@ -185,7 +216,8 @@ function handleDeleteActiveNote() {
 
     if (updatedNotes.length === 0) {
         activeNoteId = null;
-        createNewNote();
+        renderNotesList();
+        showEmptyState();
 
         return;
     }
