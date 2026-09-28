@@ -1,8 +1,5 @@
-/* 
-   Builds the terminal app inside a window content area
-*/
 function renderTerminalApp(contentElement) {
-    contentElement.innerHTML = `
+  contentElement.innerHTML = `
         <div class="terminal-app">
             <div class="terminal-output" id="terminal-output">
                 <p class="terminal-line success">NIGHTCITY TERMINAL ONLINE</p>
@@ -23,172 +20,163 @@ function renderTerminalApp(contentElement) {
         </div>
     `;
 
-    setupTerminal();
+  setupTerminal();
 }
 
-/* 
-   Connects terminal form submit to the command parser
-*/
 function setupTerminal() {
-    const terminalForm = document.querySelector("#terminal-form");
-    const terminalInput = document.querySelector("#terminal-input");
+  const terminalForm = document.querySelector("#terminal-form");
+  const terminalInput = document.querySelector("#terminal-input");
 
-    if (!terminalForm || !terminalInput) {
-        return;
+  if (!terminalForm || !terminalInput) {
+    return;
+  }
+
+  terminalInput.focus();
+
+  terminalForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const command = terminalInput.value.trim();
+
+    if (command === "") {
+      return;
     }
 
-    terminalInput.focus();
+    addTerminalLine(`fazal@nightcity:~$ ${command}`, "command");
+    runTerminalCommand(command);
 
-    terminalForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const command = terminalInput.value.trim();
-
-        if (command === "") {
-            return;
-        }
-
-        addTerminalLine(`fazal@nightcity:~$ ${command}`, "command");
-        runTerminalCommand(command);
-
-        terminalInput.value = "";
-    });
+    terminalInput.value = "";
+  });
 }
 
-/* 
-   Adds a new line to the terminal output
-*/
 function addTerminalLine(text, type) {
-    const terminalOutput = document.querySelector("#terminal-output");
+  const terminalOutput = document.querySelector("#terminal-output");
 
-    if (!terminalOutput) {
-        return;
-    }
+  if (!terminalOutput) {
+    return;
+  }
 
-    const line = document.createElement("p");
+  const line = document.createElement("p");
 
-    line.classList.add("terminal-line");
+  line.classList.add("terminal-line");
 
-    if (type) {
-        line.classList.add(type);
-    }
+  if (type) {
+    line.classList.add(type);
+  }
 
-    line.textContent = text;
+  line.textContent = text;
 
-    terminalOutput.appendChild(line);
+  terminalOutput.appendChild(line);
 
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
 }
 
-/* 
-   Reads user commands and runs matching terminal actions
-*/
 function runTerminalCommand(command) {
-    const commandParts = command.toLowerCase().split(" ");
-    const mainCommand = commandParts[0];
-    const secondCommand = commandParts.slice(1).join(" ");
+  const commandParts = command.toLowerCase().split(" ");
+  const mainCommand = commandParts[0];
+  const secondCommand = commandParts.slice(1).join(" ");
 
-    switch (mainCommand) {
-        case "help":
-            showHelpCommand();
-            break;
+  switch (mainCommand) {
+    case "help":
+      showHelpCommand();
+      break;
 
-        case "clear":
-            clearTerminal();
-            break;
+    case "clear":
+      clearTerminal();
+      break;
 
-        case "date":
-            addTerminalLine(new Date().toString(), "success");
-            break;
+    case "date":
+      addTerminalLine(new Date().toString(), "success");
+      break;
 
-        case "whoami":
-            addTerminalLine("Fazal Abbas // User 001", "success");
-            break;
+    case "whoami":
+      addTerminalLine("Fazal Abbas // User 001", "success");
+      break;
 
-        case "system-info":
-            showSystemInfo();
-            break;
+    case "system-info":
+      showSystemInfo();
+      break;
 
-        case "launch":
-            launchAppFromTerminal(secondCommand);
-            break;
+    case "launch":
+      launchAppFromTerminal(secondCommand);
+      break;
 
-        case "weather":
-            addTerminalLine("Weather command will connect to the real weather app in Step 10.", "muted");
-            break;
+    case "weather":
+      addTerminalLine(
+        "Weather command will connect to the real weather app in Step 10.",
+        "muted",
+      );
+      break;
 
-        case "music":
-            addTerminalLine("Music station switching will connect deeper after the radio system grows.", "muted");
-            break;
+    case "music":
+      addTerminalLine(
+        "Music station switching will connect deeper after the radio system grows.",
+        "muted",
+      );
+      break;
 
-        default:
-            addTerminalLine(`Command not found: ${command}. Even the robots are confused.`, "error");
-            break;
-    }
+    default:
+      addTerminalLine(
+        `Command not found: ${command}. Even the robots are confused.`,
+        "error",
+      );
+      break;
+  }
 }
 
-/* 
-   Prints the list of supported terminal commands
-*/
 function showHelpCommand() {
-    addTerminalLine("Available commands:", "success");
-    addTerminalLine("help          - show this command list", "muted");
-    addTerminalLine("clear         - clear terminal output", "muted");
-    addTerminalLine("date          - show current date and time", "muted");
-    addTerminalLine("whoami        - show current user", "muted");
-    addTerminalLine("system-info   - show fake OS stats", "muted");
-    addTerminalLine("launch radio  - open an app by name", "muted");
-    addTerminalLine("weather       - weather app shortcut placeholder", "muted");
-    addTerminalLine("music station - music shortcut placeholder", "muted");
+  addTerminalLine("Available commands:", "success");
+  addTerminalLine("help          - show this command list", "muted");
+  addTerminalLine("clear         - clear terminal output", "muted");
+  addTerminalLine("date          - show current date and time", "muted");
+  addTerminalLine("whoami        - show current user", "muted");
+  addTerminalLine("system-info   - show fake OS stats", "muted");
+  addTerminalLine("launch radio  - open an app by name", "muted");
+  addTerminalLine("weather       - weather app shortcut placeholder", "muted");
+  addTerminalLine("music station - music shortcut placeholder", "muted");
 }
 
-/* 
-   Clears the terminal output area
-*/
 function clearTerminal() {
-    const terminalOutput = document.querySelector("#terminal-output");
+  const terminalOutput = document.querySelector("#terminal-output");
 
-    if (!terminalOutput) {
-        return;
-    }
+  if (!terminalOutput) {
+    return;
+  }
 
-    terminalOutput.innerHTML = "";
+  terminalOutput.innerHTML = "";
 
-    addTerminalLine("Terminal cleared.", "success");
+  addTerminalLine("Terminal cleared.", "success");
 }
 
-/* 
-   Shows fake operating system stats
-*/
 function showSystemInfo() {
-    addTerminalLine("NIGHTCITY OS v1.0", "success");
-    addTerminalLine("User: Fazal Abbas", "muted");
-    addTerminalLine("RAM: 16GB neon memory allocated", "muted");
-    addTerminalLine("CPU: CyberCore 8088 experimental chip", "muted");
-    addTerminalLine("Uptime: unstable but stylish", "muted");
+  addTerminalLine("NIGHTCITY OS v1.0", "success");
+  addTerminalLine("User: Fazal Abbas", "muted");
+  addTerminalLine("RAM: 16GB neon memory allocated", "muted");
+  addTerminalLine("CPU: CyberCore 8088 experimental chip", "muted");
+  addTerminalLine("Uptime: unstable but stylish", "muted");
 }
 
-/* 
-   Opens an app from a terminal command
-*/
 function launchAppFromTerminal(appName) {
-    if (!appName) {
-        addTerminalLine("Usage: launch radio", "error");
+  if (!appName) {
+    addTerminalLine("Usage: launch radio", "error");
 
-        return;
-    }
+    return;
+  }
 
-    const matchedApp = apps.find(function (app) {
-        return app.id === appName || app.label.toLowerCase() === appName;
-    });
+  const matchedApp = apps.find(function (app) {
+    return app.id === appName || app.label.toLowerCase() === appName;
+  });
 
-    if (!matchedApp) {
-        addTerminalLine(`No app called "${appName}" exists in NIGHTCITY OS.`, "error");
+  if (!matchedApp) {
+    addTerminalLine(
+      `No app called "${appName}" exists in NIGHTCITY OS.`,
+      "error",
+    );
 
-        return;
-    }
+    return;
+  }
 
-    openWindow(matchedApp.id);
+  openWindow(matchedApp.id);
 
-    addTerminalLine(`Launching ${matchedApp.label}...`, "success");
+  addTerminalLine(`Launching ${matchedApp.label}...`, "success");
 }

@@ -1,53 +1,50 @@
 const fakeFileSystem = {
-    desktop: [
-        {
-            type: "folder",
-            name: "Projects"
-        },
-        {
-            type: "folder",
-            name: "Screenshots"
-        },
-        {
-            type: "file",
-            name: "welcome.txt"
-        }
-    ],
+  desktop: [
+    {
+      type: "folder",
+      name: "Projects",
+    },
+    {
+      type: "folder",
+      name: "Screenshots",
+    },
+    {
+      type: "file",
+      name: "welcome.txt",
+    },
+  ],
 
-    Projects: [
-        {
-            type: "file",
-            name: "nightcity-os.js"
-        },
-        {
-            type: "file",
-            name: "radio-engine.css"
-        },
-        {
-            type: "file",
-            name: "terminal-core.txt"
-        }
-    ],
+  Projects: [
+    {
+      type: "file",
+      name: "nightcity-os.js",
+    },
+    {
+      type: "file",
+      name: "radio-engine.css",
+    },
+    {
+      type: "file",
+      name: "terminal-core.txt",
+    },
+  ],
 
-    Screenshots: [
-        {
-            type: "file",
-            name: "desktop-preview.png"
-        },
-        {
-            type: "file",
-            name: "night-mode.png"
-        }
-    ]
+  Screenshots: [
+    {
+      type: "file",
+      name: "desktop-preview.png",
+    },
+    {
+      type: "file",
+      name: "night-mode.png",
+    },
+  ],
 };
 
 let activeFolder = "desktop";
 
-/* 
-   Builds the explorer app inside a window
-*/
 function renderExplorerApp(contentElement) {
-    contentElement.innerHTML = `
+  contentElement.innerHTML = `
         <div class="explorer-app">
 
             <aside class="explorer-sidebar">
@@ -79,81 +76,72 @@ function renderExplorerApp(contentElement) {
         </div>
     `;
 
-    setupExplorerApp();
+  setupExplorerApp();
 }
 
-/* 
-   Connects sidebar buttons and renders files
-*/
 function setupExplorerApp() {
-    const sidebarButtons = document.querySelectorAll(".explorer-sidebar-btn");
+  const sidebarButtons = document.querySelectorAll(".explorer-sidebar-btn");
 
-    sidebarButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            const folderName = button.getAttribute("data-folder");
+  sidebarButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const folderName = button.getAttribute("data-folder");
 
-            activeFolder = folderName;
+      activeFolder = folderName;
 
-            renderExplorerFiles();
-        });
+      renderExplorerFiles();
     });
+  });
 
-    renderExplorerFiles();
+  renderExplorerFiles();
 }
 
-/* 
-   Shows files and folders for the current folder
-*/
 function renderExplorerFiles() {
-    const explorerGrid = document.querySelector("#explorer-grid");
-    const folderTitle = document.querySelector("#explorer-folder-title");
+  const explorerGrid = document.querySelector("#explorer-grid");
+  const folderTitle = document.querySelector("#explorer-folder-title");
 
-    if (!explorerGrid || !folderTitle) {
-        return;
-    }
+  if (!explorerGrid || !folderTitle) {
+    return;
+  }
 
-    explorerGrid.innerHTML = "";
+  explorerGrid.innerHTML = "";
 
-    folderTitle.textContent = activeFolder;
+  folderTitle.textContent = activeFolder;
 
-    const folderItems = fakeFileSystem[activeFolder] || [];
+  const folderItems = fakeFileSystem[activeFolder] || [];
 
-    folderItems.forEach(function (item) {
-        const fileCard = document.createElement("button");
+  folderItems.forEach(function (item) {
+    const fileCard = document.createElement("button");
 
-        fileCard.classList.add("explorer-item");
-        fileCard.type = "button";
+    fileCard.classList.add("explorer-item");
+    fileCard.type = "button";
 
-        const icon = item.type === "folder" ? "📁" : "📄";
+    const icon = item.type === "folder" ? "📁" : "📄";
 
-        fileCard.innerHTML = `
+    fileCard.innerHTML = `
             <span class="explorer-item-icon">${icon}</span>
             <span class="explorer-item-name">${item.name}</span>
         `;
 
-        fileCard.addEventListener("dblclick", function () {
-            handleExplorerItem(item);
-        });
-
-        explorerGrid.appendChild(fileCard);
+    fileCard.addEventListener("dblclick", function () {
+      handleExplorerItem(item);
     });
+
+    explorerGrid.appendChild(fileCard);
+  });
 }
 
-/* 
-   Handles opening folders or files
-*/
 function handleExplorerItem(item) {
-    if (item.type === "folder") {
-        activeFolder = item.name;
+  if (item.type === "folder") {
+    activeFolder = item.name;
 
-        renderExplorerFiles();
+    renderExplorerFiles();
 
-        return;
-    }
+    return;
+  }
 
-    sendNotification(
-        "File Opened",
-        `${item.name} launched successfully.`,
-        "info"
-    );
+  sendNotification(
+    "File Opened",
+    `${item.name} launched successfully.`,
+    "info",
+  );
 }

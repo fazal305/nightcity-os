@@ -1,91 +1,70 @@
 let inactivityTimer = null;
 let isScreensaverActive = false;
 
-/* 
-   Starts all ambient OS reactions
-*/
 function startAmbientSystem() {
-    applyDeepNightMode();
-    setupInactivityWatcher();
+  applyDeepNightMode();
+  setupInactivityWatcher();
 
-    setInterval(applyDeepNightMode, 60000);
+  setInterval(applyDeepNightMode, 60000);
 }
 
-/* 
-   Applies darker styling between midnight and 6am
-*/
 function applyDeepNightMode() {
-    const currentHour = new Date().getHours();
+  const currentHour = new Date().getHours();
 
-    if (currentHour >= 0 && currentHour < 6) {
-        document.documentElement.classList.add("deep-night-mode");
-    } else {
-        document.documentElement.classList.remove("deep-night-mode");
-    }
+  if (currentHour >= 0 && currentHour < 6) {
+    document.documentElement.classList.add("deep-night-mode");
+  } else {
+    document.documentElement.classList.remove("deep-night-mode");
+  }
 }
 
-/* 
-   Watches user activity and starts screensaver after inactivity
-*/
 function setupInactivityWatcher() {
-    resetInactivityTimer();
+  resetInactivityTimer();
 
-    document.addEventListener("mousemove", handleUserActivity);
-    document.addEventListener("keydown", handleUserActivity);
-    document.addEventListener("click", handleUserActivity);
-    document.addEventListener("touchstart", handleUserActivity);
+  document.addEventListener("mousemove", handleUserActivity);
+  document.addEventListener("keydown", handleUserActivity);
+  document.addEventListener("click", handleUserActivity);
+  document.addEventListener("touchstart", handleUserActivity);
 }
 
-/* 
-   Resets the inactivity timer whenever the user interacts
-*/
 function handleUserActivity() {
-    if (isScreensaverActive) {
-        hideScreensaver();
-    }
+  if (isScreensaverActive) {
+    hideScreensaver();
+  }
 
-    resetInactivityTimer();
+  resetInactivityTimer();
 }
 
-/* 
-   Starts the 60 second inactivity countdown
-*/
 function resetInactivityTimer() {
-    clearTimeout(inactivityTimer);
+  clearTimeout(inactivityTimer);
 
-    inactivityTimer = setTimeout(function () {
-        showScreensaver();
-    }, 60000);
+  inactivityTimer = setTimeout(function () {
+    showScreensaver();
+  }, 60000);
 }
 
-/* 
-   Shows the full screen screensaver
-*/
 function showScreensaver() {
-    const screensaver = document.querySelector("#screensaver");
+  const screensaver = document.querySelector("#screensaver");
 
-    if (!screensaver) {
-        return;
-    }
+  if (!screensaver) {
+    return;
+  }
 
-    isScreensaverActive = true;
+  isScreensaverActive = true;
 
-    screensaver.classList.add("screensaver-visible");
+  screensaver.classList.add("screensaver-visible");
 }
 
-/* 
-   Hides the screensaver when user returns
-*/
 function hideScreensaver() {
-    const screensaver = document.querySelector("#screensaver");
+  const screensaver = document.querySelector("#screensaver");
 
-    if (!screensaver) {
-        return;
-    }
+  if (!screensaver) {
+    return;
+  }
 
-    isScreensaverActive = false;
+  isScreensaverActive = false;
 
-    screensaver.classList.remove("screensaver-visible");
+  screensaver.classList.remove("screensaver-visible");
 }
 
 startAmbientSystem();

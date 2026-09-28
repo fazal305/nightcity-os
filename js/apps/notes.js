@@ -1,10 +1,7 @@
 let activeNoteId = null;
 
-/* 
-   Builds the notes app inside a window content area
-*/
 function renderNotesApp(contentElement) {
-    contentElement.innerHTML = `
+  contentElement.innerHTML = `
         <div class="notes-app">
             <aside class="notes-sidebar">
                 <button class="notes-new-btn" id="notes-new-btn" type="button">
@@ -37,208 +34,184 @@ function renderNotesApp(contentElement) {
         </div>
     `;
 
-    setupNotesApp();
+  setupNotesApp();
 }
 
-/* 
-   Connects notes buttons and inputs to note actions
-*/
 function setupNotesApp() {
-    const newButton = document.querySelector("#notes-new-btn");
-    const deleteButton = document.querySelector("#notes-delete-btn");
-    const titleInput = document.querySelector("#notes-title-input");
-    const contentInput = document.querySelector("#notes-content-input");
+  const newButton = document.querySelector("#notes-new-btn");
+  const deleteButton = document.querySelector("#notes-delete-btn");
+  const titleInput = document.querySelector("#notes-title-input");
+  const contentInput = document.querySelector("#notes-content-input");
 
-    const notes = loadAllNotes();
+  const notes = loadAllNotes();
 
-    if (notes.length === 0) {
-        activeNoteId = null;
-        renderNotesList();
-        showEmptyState();
-    } else {
-        activeNoteId = notes[0].id;
-        renderNotesList();
-        loadActiveNote();
-    }
+  if (notes.length === 0) {
+    activeNoteId = null;
+    renderNotesList();
+    showEmptyState();
+  } else {
+    activeNoteId = notes[0].id;
+    renderNotesList();
+    loadActiveNote();
+  }
 
-    newButton.addEventListener("click", createNewNote);
-    deleteButton.addEventListener("click", handleDeleteActiveNote);
+  newButton.addEventListener("click", createNewNote);
+  deleteButton.addEventListener("click", handleDeleteActiveNote);
 
-    titleInput.addEventListener("input", saveActiveNote);
-    contentInput.addEventListener("input", saveActiveNote);
+  titleInput.addEventListener("input", saveActiveNote);
+  contentInput.addEventListener("input", saveActiveNote);
 }
 
-/* 
-   Creates a new blank note
-*/
 function createNewNote() {
-    const notes = loadAllNotes();
+  const notes = loadAllNotes();
 
-    const newNote = {
-        id: `note-${Date.now()}`,
-        title: "Untitled Note",
-        content: ""
-    };
+  const newNote = {
+    id: `note-${Date.now()}`,
+    title: "Untitled Note",
+    content: "",
+  };
 
-    notes.unshift(newNote);
+  notes.unshift(newNote);
 
-    saveAllNotes(notes);
+  saveAllNotes(notes);
 
-    activeNoteId = newNote.id;
+  activeNoteId = newNote.id;
 
-    renderNotesList();
-    loadActiveNote();
+  renderNotesList();
+  loadActiveNote();
 }
 
-/* 
-   Shows all notes in the sidebar
-*/
 function renderNotesList() {
-    const notesList = document.querySelector("#notes-list");
-    const notes = loadAllNotes();
+  const notesList = document.querySelector("#notes-list");
+  const notes = loadAllNotes();
 
-    if (!notesList) {
-        return;
+  if (!notesList) {
+    return;
+  }
+
+  notesList.innerHTML = "";
+
+  if (notes.length === 0) {
+    const emptyMessage = document.createElement("p");
+
+    emptyMessage.classList.add("notes-empty-message");
+    emptyMessage.textContent = "No notes yet.";
+
+    notesList.appendChild(emptyMessage);
+
+    return;
+  }
+
+  notes.forEach(function (note) {
+    const noteButton = document.createElement("button");
+
+    noteButton.classList.add("note-list-btn");
+    noteButton.type = "button";
+    noteButton.textContent = note.title || "Untitled Note";
+
+    if (note.id === activeNoteId) {
+      noteButton.classList.add("active");
     }
 
-    notesList.innerHTML = "";
+    noteButton.addEventListener("click", function () {
+      activeNoteId = note.id;
 
-    if (notes.length === 0) {
-        const emptyMessage = document.createElement("p");
-
-        emptyMessage.classList.add("notes-empty-message");
-        emptyMessage.textContent = "No notes yet.";
-
-        notesList.appendChild(emptyMessage);
-
-        return;
-    }
-
-    notes.forEach(function (note) {
-        const noteButton = document.createElement("button");
-
-        noteButton.classList.add("note-list-btn");
-        noteButton.type = "button";
-        noteButton.textContent = note.title || "Untitled Note";
-
-        if (note.id === activeNoteId) {
-            noteButton.classList.add("active");
-        }
-
-        noteButton.addEventListener("click", function () {
-            activeNoteId = note.id;
-
-            renderNotesList();
-            loadActiveNote();
-        });
-
-        notesList.appendChild(noteButton);
+      renderNotesList();
+      loadActiveNote();
     });
+
+    notesList.appendChild(noteButton);
+  });
 }
 
-/*
-   Shows a simple empty state when there are no notes yet
-*/
 function showEmptyState() {
-    const titleInput = document.querySelector("#notes-title-input");
-    const contentInput = document.querySelector("#notes-content-input");
+  const titleInput = document.querySelector("#notes-title-input");
+  const contentInput = document.querySelector("#notes-content-input");
 
-    if (titleInput) {
-        titleInput.value = "";
-    }
+  if (titleInput) {
+    titleInput.value = "";
+  }
 
-    if (contentInput) {
-        contentInput.value = "";
-    }
+  if (contentInput) {
+    contentInput.value = "";
+  }
 
-    updateNotesStatus("No notes yet. Click \"+ New Note\" to create one.");
+  updateNotesStatus('No notes yet. Click "+ New Note" to create one.');
 }
 
-/*
-   Loads the selected note into the editor
-*/
 function loadActiveNote() {
-    const titleInput = document.querySelector("#notes-title-input");
-    const contentInput = document.querySelector("#notes-content-input");
-    const notes = loadAllNotes();
+  const titleInput = document.querySelector("#notes-title-input");
+  const contentInput = document.querySelector("#notes-content-input");
+  const notes = loadAllNotes();
 
-    const activeNote = notes.find(function (note) {
-        return note.id === activeNoteId;
-    });
+  const activeNote = notes.find(function (note) {
+    return note.id === activeNoteId;
+  });
 
-    if (!activeNote || !titleInput || !contentInput) {
-        return;
-    }
+  if (!activeNote || !titleInput || !contentInput) {
+    return;
+  }
 
-    titleInput.value = activeNote.title;
-    contentInput.value = activeNote.content;
+  titleInput.value = activeNote.title;
+  contentInput.value = activeNote.content;
 
-    updateNotesStatus("Loaded note.");
+  updateNotesStatus("Loaded note.");
 }
 
-/* 
-   Auto-saves the selected note on every keystroke
-*/
 function saveActiveNote() {
-    const titleInput = document.querySelector("#notes-title-input");
-    const contentInput = document.querySelector("#notes-content-input");
+  const titleInput = document.querySelector("#notes-title-input");
+  const contentInput = document.querySelector("#notes-content-input");
 
-    let notes = loadAllNotes();
+  let notes = loadAllNotes();
 
-    notes = notes.map(function (note) {
-        if (note.id === activeNoteId) {
-            return {
-                id: note.id,
-                title: titleInput.value || "Untitled Note",
-                content: contentInput.value
-            };
-        }
+  notes = notes.map(function (note) {
+    if (note.id === activeNoteId) {
+      return {
+        id: note.id,
+        title: titleInput.value || "Untitled Note",
+        content: contentInput.value,
+      };
+    }
 
-        return note;
-    });
+    return note;
+  });
 
-    saveAllNotes(notes);
+  saveAllNotes(notes);
 
-    renderNotesList();
+  renderNotesList();
 
-    updateNotesStatus("Saved automatically.");
+  updateNotesStatus("Saved automatically.");
 }
 
-/* 
-   Deletes the current selected note
-*/
 function handleDeleteActiveNote() {
-    if (!activeNoteId) {
-        return;
-    }
+  if (!activeNoteId) {
+    return;
+  }
 
-    const updatedNotes = deleteNote(activeNoteId);
+  const updatedNotes = deleteNote(activeNoteId);
 
-    if (updatedNotes.length === 0) {
-        activeNoteId = null;
-        renderNotesList();
-        showEmptyState();
-
-        return;
-    }
-
-    activeNoteId = updatedNotes[0].id;
-
+  if (updatedNotes.length === 0) {
+    activeNoteId = null;
     renderNotesList();
-    loadActiveNote();
+    showEmptyState();
 
-    updateNotesStatus("Deleted note.");
+    return;
+  }
+
+  activeNoteId = updatedNotes[0].id;
+
+  renderNotesList();
+  loadActiveNote();
+
+  updateNotesStatus("Deleted note.");
 }
 
-/* 
-   Updates the small status text under the editor
-*/
 function updateNotesStatus(message) {
-    const status = document.querySelector("#notes-status");
+  const status = document.querySelector("#notes-status");
 
-    if (!status) {
-        return;
-    }
+  if (!status) {
+    return;
+  }
 
-    status.textContent = message;
+  status.textContent = message;
 }
